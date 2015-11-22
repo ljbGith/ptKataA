@@ -1,7 +1,10 @@
 import com.pillarescent.RomanNumerals;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
 
 public class RomanNumeralsTest {
     @Test
@@ -18,5 +21,10 @@ public class RomanNumeralsTest {
     public void whenInputIs3OutputIsIII() {
         RomanNumerals romanNumerals = new RomanNumerals();
         assertEquals("III", romanNumerals.fromArabic(3));
+    }
+    @Test
+    public void whenInputIs4OutputDoesNotContainMoreThan3IsInARow() {
+        RomanNumerals romanNumerals = new RomanNumerals();
+        assertFalse(romanNumerals.fromArabic(4).contains("IIII"));
     }
 }
