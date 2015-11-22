@@ -1,7 +1,5 @@
 import com.pillarescent.ArabicToRomanConversion;
 
-import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
-import junit.framework.Assert;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -94,6 +92,30 @@ public class ArabicToRomanConversionTest  {
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         arabicToRomanConv.replaceExcessiveRepeated1LikeNumeralsWith4Or9();
         assertFalse(arabicToRomanConv.romanEndsWithMoreThan3InARow());
+    }
+    @Test
+    public void onArabic999ShiftAndFix4sUntilDoneAndExpectRomanToBeCMXCIX() throws Exception {
+        ArabicToRomanConversion arabicToRomanConv = new ArabicToRomanConversion(999);
+        int shiftCount = 0;
+        while ( ! arabicToRomanConv.conversionIsDone() ) {
+            shiftCount++;
+            arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+            arabicToRomanConv.replaceExcessiveRepeated1LikeNumeralsWith4Or9();
+            assertTrue(shiftCount < 100);  // Expect that loop should be limited.
+        }
+        assertEquals(arabicToRomanConv.getCurrentRomanValue(), "CMXCIX");
+    }
+    @Test
+    public void onArabic1944ShiftAndFix4sUntilDoneAndExpectRomanToBeMCMXLIV() throws Exception {
+        ArabicToRomanConversion arabicToRomanConv = new ArabicToRomanConversion(1944);
+        int shiftCount = 0;
+        while ( ! arabicToRomanConv.conversionIsDone() ) {
+            shiftCount++;
+            arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+            arabicToRomanConv.replaceExcessiveRepeated1LikeNumeralsWith4Or9();
+            assertTrue(shiftCount < 100);  // Expect that loop should be limited.
+        }
+        assertEquals(arabicToRomanConv.getCurrentRomanValue(), "MCMXLIV");
     }
 
 }
