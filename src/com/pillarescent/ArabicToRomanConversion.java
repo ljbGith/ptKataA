@@ -50,6 +50,7 @@ public class ArabicToRomanConversion {
         }
     }
 
+
     public void replaceExcessiveRepeated1LikeNumeralsWith4Or9() throws Exception {
         Replacement[] replacements = new Replacement[] {
                 new Replacement("VIIII", "IX"),

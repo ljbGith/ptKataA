@@ -20,8 +20,8 @@ public class ArabicToRomanConversionTest  {
     public void afterConstructingOn1QueryOnStateYieldsOrigArabicValAndEmptyRomanRepresentation() {
         ArabicToRomanConversion arabicToRomanConv = new ArabicToRomanConversion(1);
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 1);
-        assertEquals(currRomanVal, "");
+        assertEquals(1, currArabicVal);
+        assertEquals("", currRomanVal);
     }
     @Test
     public void afterConstructingOnAnyVal_QueryOnStateYieldsOrigArabicValAndEmptyRomanRepresentation() {
@@ -29,34 +29,34 @@ public class ArabicToRomanConversionTest  {
 
         arabicToRomanConv = new ArabicToRomanConversion(2);
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 2);
-        assertEquals(currRomanVal, "");
+        assertEquals(2, currArabicVal);
+        assertEquals("", currRomanVal);
 
         arabicToRomanConv = new ArabicToRomanConversion(5);
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 5);
-        assertEquals(currRomanVal, "");
+        assertEquals(5, currArabicVal);
+        assertEquals("", currRomanVal);
 
         arabicToRomanConv = new ArabicToRomanConversion(157);
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 157);
-        assertEquals(currRomanVal, "");
+        assertEquals(157, currArabicVal);
+        assertEquals("", currRomanVal);
     }
     @Test
     public void afterConstructingOn1AndShiftingRomanIsIAndArabicIs0() throws Exception {
         ArabicToRomanConversion arabicToRomanConv = new ArabicToRomanConversion(1);
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 0);
-        assertEquals(currRomanVal, "I");
+        assertEquals(0, currArabicVal);
+        assertEquals("I", currRomanVal);
     }
     @Test
     public void afterConstructingOn157AndShiftingRomanIsCAndArabicIs57() throws Exception {
         ArabicToRomanConversion arabicToRomanConv = new ArabicToRomanConversion(157);
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 57);
-        assertEquals(currRomanVal, "C");
+        assertEquals(57, currArabicVal);
+        assertEquals("C", currRomanVal);
     }
     @Test
     public void afterConstructingOn157AndTwoShiftsRomanIsCLAndArabicIs7() throws Exception {
@@ -64,8 +64,8 @@ public class ArabicToRomanConversionTest  {
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 7);
-        assertEquals(currRomanVal, "CL");
+        assertEquals(7, currArabicVal);
+        assertEquals("CL", currRomanVal);
     }
     @Test
     public void afterConstructingOn157AndFiveShiftsRomanIsCLVIIAndArabicIs0() throws Exception {
@@ -73,17 +73,17 @@ public class ArabicToRomanConversionTest  {
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 7);
-        assertEquals(currRomanVal, "CL");
+        assertEquals(7, currArabicVal);
+        assertEquals("CL", currRomanVal);
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 1);
-        assertEquals(currRomanVal, "CLVI");
+        assertEquals(1, currArabicVal);
+        assertEquals("CLVI", currRomanVal);
         arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
         setValuesFrom(arabicToRomanConv);
-        assertEquals(currArabicVal, 0);
-        assertEquals(currRomanVal, "CLVII");
+        assertEquals(0, currArabicVal);
+        assertEquals("CLVII", currRomanVal);
     }
     @Test
     public void after4ShiftsRomanFor4DoesNotEndWithMoreThan3InARow() throws Exception {
