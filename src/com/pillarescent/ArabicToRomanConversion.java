@@ -33,15 +33,51 @@ public class ArabicToRomanConversion {
 
     public boolean romanEndsWithMoreThan3InARow() {
         String romanValue = getCurrentRomanValue();
-        return romanValue.matches(".*(I|X|C|M){3}$");
+        return romanValue.matches(".*(I{4}|X{4}|C{4}|M{4})$");
+            // Regex says match on 4 of any of the following at the end ($)
+            // of the string: 'I' or 'X' or 'C' or 'M'.
     }
 
-    public void replaceExcessiveRepeated1LikeNumeralsWith4Or9() {
-       // ToDo - implement this!
+    public void replaceExcessiveRepeated1LikeNumeralsWith4Or9() throws Exception {
+        String romanValue = getCurrentRomanValue();
+        if (romanValue.length() == 0) {
+            return;
+        }
+        // If it ends with IIII, I must be the repeated numeral; XXXX then it's X; etc.
+        String repeatedNumeral = romanValue.substring(romanValue.length() - 1);
+        String strippedRomanValue = romanValueWithRepeatedFinalNumeralRemoved();
+        if (strippedRomanValue.length() > 0) {
+            String possibleFinal5LikeNumeral = strippedRomanValue.substring(strippedRomanValue.length() - 1);
+            if (isFiveLike(possibleFinal5LikeNumeral)) {
+                // Replace VIIII with IX, LXXXX with XC, and DCCCC with CM.
+                int valOfRepeatedNumeral = valueOfNumeral(repeatedNumeral);
+                String nextHigher1LikeNumeral = biggestRequiredNumeral(valOfRepeatedNumeral * 10);
+                String furtherStrippedRomanValue = strippedRomanValue.substring(0, strippedRomanValue.length() - 1);
+                setCurrentRomanValue(furtherStrippedRomanValue + repeatedNumeral + nextHigher1LikeNumeral);
+            }
+            else {
+                // Replace IIII with IV, XXXX with XL, and CCCC with CD.
+                int valOfRepeatedNumeral = valueOfNumeral(repeatedNumeral);
+                String nextHigher5LikeNumeral = biggestRequiredNumeral(valOfRepeatedNumeral * 5);
+                setCurrentRomanValue(strippedRomanValue + repeatedNumeral + nextHigher5LikeNumeral);
+            }
+        }
     }
 
     public boolean conversionIsDone() {
         return (getCurrentArabicValue() == 0);
+    }
+
+    private String romanValueWithRepeatedFinalNumeralRemoved() {
+        String romanValue = getCurrentRomanValue();
+        if (romanValue.length() == 0) {
+            return romanValue;
+        }
+        String finalNumeral = romanValue.substring(romanValue.length()-1);
+        while (romanValue.endsWith(finalNumeral)) {
+            romanValue = romanValue.substring(0, romanValue.length() - 1);
+        }
+        return romanValue;
     }
 
     private static String biggestRequiredNumeral(int num) throws Exception {
@@ -70,6 +106,15 @@ public class ArabicToRomanConversion {
         return result;
     }
 
+    public static boolean isOneLike(String numeral) {
+        boolean result = false;
+        return ((numeral.length() == 1) && "IXCM".contains(numeral));
+    }
+    public static boolean isFiveLike(String numeral) {
+        boolean result = false;
+        return ((numeral.length() == 1) && "VLD".contains(numeral));
+    }
+
     private static int valueOfNumeral(String numeral) throws Exception {
         if (numeral.equals("M")) { return 1000; }
         if (numeral.equals("D")) { return  500; }
@@ -80,5 +125,6 @@ public class ArabicToRomanConversion {
         if (numeral.equals("I")) { return    1; }
         throw new Exception("String '" + numeral + "' is not a Roman numeral.");
     }
+
 }
 
