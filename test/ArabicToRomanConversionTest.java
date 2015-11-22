@@ -72,4 +72,27 @@ public class ArabicToRomanConversionTest  {
         assertEquals(currArabicVal, 7);
         assertEquals(currRomanVal, "CL");
     }
+    @Test
+    public void afterConstructingOn157AndFiveShiftsRomanIsCLVIIAndArabicIs0() throws Exception {
+        int currArabicVal;
+        String currRomanVal;
+        ArabicToRomanConversion arabicToRomanConv = new ArabicToRomanConversion(157);
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        currArabicVal = arabicToRomanConv.getCurrentArabicValue();
+        currRomanVal = arabicToRomanConv.getCurrentRomanValue();
+        assertEquals(currArabicVal, 7);
+        assertEquals(currRomanVal, "CL");
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        currArabicVal = arabicToRomanConv.getCurrentArabicValue();
+        currRomanVal = arabicToRomanConv.getCurrentRomanValue();
+        assertEquals(currArabicVal, 1);
+        assertEquals(currRomanVal, "CLVI");
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        currArabicVal = arabicToRomanConv.getCurrentArabicValue();
+        currRomanVal = arabicToRomanConv.getCurrentRomanValue();
+        assertEquals(currArabicVal, 0);
+        assertEquals(currRomanVal, "CLVII");
+    }
 }
