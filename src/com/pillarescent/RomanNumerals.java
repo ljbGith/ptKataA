@@ -9,11 +9,10 @@ public class RomanNumerals {
     public String fromArabic(int num) {
         String romanChars = "";
         try {
-            while (num > 0) {
-                String biggestNumeral = biggestRequiredNumeral(num);
-                int valOfBiggestNumeral = valueOfNumeral(biggestNumeral);
-                romanChars = romanChars + biggestNumeral;
-                num -= valOfBiggestNumeral;
+            ArabicToRomanConversionState conversionState = new ArabicToRomanConversionState(num);
+            while (conversionState.getCurrentArabicValue() > 0) {
+                // ToDo: conversionState.isDone method to hide >0 check.
+                conversionState.shiftNextNumeralValueFromArabicToRoman();
             }
         }
         catch (Exception ex) {
@@ -24,7 +23,7 @@ public class RomanNumerals {
         return romanChars;
     }
 
-    private String biggestRequiredNumeral(int num)
+    private static String biggestRequiredNumeral(int num)
         throws Exception {
         String result = "";
 
@@ -62,5 +61,33 @@ public class RomanNumerals {
         if (numeral.equals("V")) { return    5; }
         if (numeral.equals("I")) { return    1; }
         throw new Exception("String '" + numeral + "' is not a Roman numeral.");
+    }
+
+
+    protected class ArabicToRomanConversionState {
+        protected int _currentArabicValue;
+        protected String _currentRomanValue;
+        public ArabicToRomanConversionState(int arabicStartingValue) {
+            _currentArabicValue = arabicStartingValue;
+            _currentRomanValue = "";   // Redundant?
+        }
+        public int getCurrentArabicValue() {
+            return _currentArabicValue;
+        }
+        protected void setCurrentArabicValue(int newValue) {
+            _currentArabicValue = newValue;
+        }
+        public String getCurrentRomanValue() {
+            return _currentRomanValue;
+        }
+        protected void setCurrentRomanValue(String newValue) {
+            _currentRomanValue = newValue;
+        }
+        public void shiftNextNumeralValueFromArabicToRoman() throws Exception {
+            String biggestNumeral = biggestRequiredNumeral(getCurrentArabicValue());
+            int valOfBiggestNumeral = valueOfNumeral(biggestNumeral);
+            setCurrentRomanValue(getCurrentRomanValue() + biggestNumeral);
+            setCurrentArabicValue(getCurrentArabicValue() - valOfBiggestNumeral);
+        }
     }
 }
