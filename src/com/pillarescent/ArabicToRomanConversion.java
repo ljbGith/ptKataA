@@ -1,5 +1,8 @@
 package com.pillarescent;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ArabicToRomanConversion {
     protected int _currentArabicValue;
     protected String _currentRomanValue;
@@ -38,29 +41,39 @@ public class ArabicToRomanConversion {
             // of the string: 'I' or 'X' or 'C' or 'M'.
     }
 
-    public void replaceExcessiveRepeated1LikeNumeralsWith4Or9() throws Exception {
-        String romanValue = getCurrentRomanValue();
-        if (romanValue.length() == 0) {
-            return;
+    private class Replacement {
+        public String oldStr;
+        public String newStr;
+        public Replacement(String _oldStr, String _newStr) {
+            oldStr = _oldStr;
+            newStr = _newStr;
         }
-        // If it ends with IIII, I must be the repeated numeral; XXXX then it's X; etc.
-        String repeatedNumeral = romanValue.substring(romanValue.length() - 1);
-        String strippedRomanValue = romanValueWithRepeatedFinalNumeralRemoved();
-        if (strippedRomanValue.length() > 0) {
-            String possibleFinal5LikeNumeral = strippedRomanValue.substring(strippedRomanValue.length() - 1);
-            if (isFiveLike(possibleFinal5LikeNumeral)) {
-                // Replace VIIII with IX, LXXXX with XC, and DCCCC with CM.
-                int valOfRepeatedNumeral = valueOfNumeral(repeatedNumeral);
-                String nextHigher1LikeNumeral = biggestRequiredNumeral(valOfRepeatedNumeral * 10);
-                String furtherStrippedRomanValue = strippedRomanValue.substring(0, strippedRomanValue.length() - 1);
-                setCurrentRomanValue(furtherStrippedRomanValue + repeatedNumeral + nextHigher1LikeNumeral);
-            }
-            else {
-                // Replace IIII with IV, XXXX with XL, and CCCC with CD.
-                int valOfRepeatedNumeral = valueOfNumeral(repeatedNumeral);
-                String nextHigher5LikeNumeral = biggestRequiredNumeral(valOfRepeatedNumeral * 5);
-                setCurrentRomanValue(strippedRomanValue + repeatedNumeral + nextHigher5LikeNumeral);
-            }
+    }
+
+    public void replaceExcessiveRepeated1LikeNumeralsWith4Or9() throws Exception {
+        Replacement[] replacements = new Replacement[] {
+                new Replacement("VIIII", "IX"),
+                new Replacement( "IIII", "IV"),
+                new Replacement("LXXXX", "XC"),
+                new Replacement( "XXXX", "XL"),
+                new Replacement("DCCCC", "CM"),
+                new Replacement( "CCCC", "CD")
+        };
+        String romanValue = getCurrentRomanValue();
+        String newRoman = "";
+        boolean matchedAndDone = false;
+        for (int replacementIdx = 0;
+             ( ! matchedAndDone ) && (replacementIdx < replacements.length);
+             replacementIdx++) {
+            String stringToMatch = replacements[replacementIdx].oldStr;
+            String replacementStr = replacements[replacementIdx].newStr;
+            Pattern pat = Pattern.compile(stringToMatch + "$"); // +"$" => match only at end
+            Matcher matcher = pat.matcher(romanValue);
+            newRoman = matcher.replaceAll(replacementStr);
+            matchedAndDone = ( ! newRoman.equals(romanValue) );
+        }
+        if (matchedAndDone) {
+            setCurrentRomanValue(newRoman);
         }
     }
 
@@ -68,17 +81,6 @@ public class ArabicToRomanConversion {
         return (getCurrentArabicValue() == 0);
     }
 
-    private String romanValueWithRepeatedFinalNumeralRemoved() {
-        String romanValue = getCurrentRomanValue();
-        if (romanValue.length() == 0) {
-            return romanValue;
-        }
-        String finalNumeral = romanValue.substring(romanValue.length()-1);
-        while (romanValue.endsWith(finalNumeral)) {
-            romanValue = romanValue.substring(0, romanValue.length() - 1);
-        }
-        return romanValue;
-    }
 
     private static String biggestRequiredNumeral(int num) throws Exception {
         String result;
@@ -104,15 +106,6 @@ public class ArabicToRomanConversion {
         }
 
         return result;
-    }
-
-    public static boolean isOneLike(String numeral) {
-        boolean result = false;
-        return ((numeral.length() == 1) && "IXCM".contains(numeral));
-    }
-    public static boolean isFiveLike(String numeral) {
-        boolean result = false;
-        return ((numeral.length() == 1) && "VLD".contains(numeral));
     }
 
     private static int valueOfNumeral(String numeral) throws Exception {

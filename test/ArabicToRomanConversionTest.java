@@ -1,8 +1,11 @@
 import com.pillarescent.ArabicToRomanConversion;
 
+import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
+import junit.framework.Assert;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.assertFalse;
 
 public class ArabicToRomanConversionTest  {
     int currArabicVal;
