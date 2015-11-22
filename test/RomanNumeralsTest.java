@@ -31,6 +31,10 @@ public class RomanNumeralsTest {
         assertFalse(romanFor4.contains("IIII"));
     }
     @Test
+    public void whenInputIs4OutputIsIV() {
+        assertEquals("IV", romanNumerals.fromArabic(4));
+    }
+    @Test
     public void whenInputIs157OutputIsCLVII() {
         String romanFor157 = romanNumerals.fromArabic(157);
         assertEquals("CLVII", romanFor157);
