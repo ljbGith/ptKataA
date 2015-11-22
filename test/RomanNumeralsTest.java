@@ -9,4 +9,9 @@ public class RomanNumeralsTest {
         RomanNumerals romanNumerals = new RomanNumerals();
         assertEquals("I", romanNumerals.fromArabic(1));
     }
+    @Test
+    public void whenInputIs2OutputIsII() {
+        RomanNumerals romanNumerals = new RomanNumerals();
+        assertEquals("II", romanNumerals.fromArabic(2));
+    }
 }
