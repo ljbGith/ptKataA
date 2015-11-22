@@ -1,5 +1,8 @@
+import com.pillarescent.RomanNumerals;
 import org.junit.Test;
-// [NON-COMPILING CODE COMMITTED ONLY TO SHOW FAILURE OF EXISTENCE OF APPLICATION CLASS.]
+
+import static junit.framework.TestCase.assertEquals;
+
 public class RomanNumeralsTest {
     @Test
     public void whenInputIs1OutputIsASingleI() {
