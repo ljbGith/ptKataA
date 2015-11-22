@@ -1,37 +1,51 @@
 package com.pillarescent;
 
 public class ArabicToRomanConversion {
-        protected int _currentArabicValue;
-        protected String _currentRomanValue;
-        public ArabicToRomanConversion(int arabicStartingValue) {
-            _currentArabicValue = arabicStartingValue;
-            _currentRomanValue = "";   // Redundant?
-        }
-        public int getCurrentArabicValue() {
-            return _currentArabicValue;
-        }
-        protected void setCurrentArabicValue(int newValue) {
-            _currentArabicValue = newValue;
-        }
-        public String getCurrentRomanValue() {
-            return _currentRomanValue;
-        }
-        protected void setCurrentRomanValue(String newValue) {
-            _currentRomanValue = newValue;
-        }
-        public void shiftNextNumeralValueFromArabicToRoman() throws Exception {
-            String biggestNumeral = biggestRequiredNumeral(getCurrentArabicValue());
-            int valOfBiggestNumeral = valueOfNumeral(biggestNumeral);
-            setCurrentRomanValue(getCurrentRomanValue() + biggestNumeral);
-            setCurrentArabicValue(getCurrentArabicValue() - valOfBiggestNumeral);
-        }
-        public boolean conversionIsDone() {
-            return (getCurrentArabicValue() == 0);
-        }
+    protected int _currentArabicValue;
+    protected String _currentRomanValue;
+    public ArabicToRomanConversion(int arabicStartingValue) {
+        _currentArabicValue = arabicStartingValue;
+        _currentRomanValue = "";   // Redundant?
+    }
 
-        private static String biggestRequiredNumeral(int num)
-        throws Exception {
-        String result = "";
+    public int getCurrentArabicValue() {
+        return _currentArabicValue;
+    }
+
+    protected void setCurrentArabicValue(int newValue) {
+        _currentArabicValue = newValue;
+    }
+
+    public String getCurrentRomanValue() {
+        return _currentRomanValue;
+    }
+
+    protected void setCurrentRomanValue(String newValue) {
+        _currentRomanValue = newValue;
+    }
+
+    public void shiftNextNumeralValueFromArabicToRoman() throws Exception {
+        String biggestNumeral = biggestRequiredNumeral(getCurrentArabicValue());
+        int valOfBiggestNumeral = valueOfNumeral(biggestNumeral);
+        setCurrentRomanValue(getCurrentRomanValue() + biggestNumeral);
+        setCurrentArabicValue(getCurrentArabicValue() - valOfBiggestNumeral);
+    }
+
+    public boolean romanEndsWithMoreThan3InARow() {
+        String romanValue = getCurrentRomanValue();
+        return romanValue.matches(".*(I|X|C|M){3}$");
+    }
+
+    public void replaceExcessiveRepeated1LikeNumeralsWith4Or9() {
+       // ToDo - implement this!
+    }
+
+    public boolean conversionIsDone() {
+        return (getCurrentArabicValue() == 0);
+    }
+
+    private static String biggestRequiredNumeral(int num) throws Exception {
+        String result;
 
         if (num >= 5000) {
             throw new Exception("Number " + num + " is too large for Roman numeral representation.");
@@ -56,9 +70,7 @@ public class ArabicToRomanConversion {
         return result;
     }
 
-
-    private static int valueOfNumeral(String numeral)
-        throws Exception {
+    private static int valueOfNumeral(String numeral) throws Exception {
         if (numeral.equals("M")) { return 1000; }
         if (numeral.equals("D")) { return  500; }
         if (numeral.equals("C")) { return  100; }

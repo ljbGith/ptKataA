@@ -1,8 +1,8 @@
 import com.pillarescent.ArabicToRomanConversion;
 
-import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ArabicToRomanConversionTest  {
     int currArabicVal;
@@ -82,4 +82,15 @@ public class ArabicToRomanConversionTest  {
         assertEquals(currArabicVal, 0);
         assertEquals(currRomanVal, "CLVII");
     }
+    @Test
+    public void after4ShiftsRomanFor4DoesNotEndWithMoreThan3InARow() throws Exception {
+        ArabicToRomanConversion arabicToRomanConv = new ArabicToRomanConversion(4);
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        arabicToRomanConv.shiftNextNumeralValueFromArabicToRoman();
+        arabicToRomanConv.replaceExcessiveRepeated1LikeNumeralsWith4Or9();
+        assertFalse(arabicToRomanConv.romanEndsWithMoreThan3InARow());
+    }
+
 }

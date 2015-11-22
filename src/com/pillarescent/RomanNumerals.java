@@ -13,6 +13,12 @@ public class RomanNumerals {
             while ( ! conversion.conversionIsDone() ) {
                 // ToDo: conversionState.isDone method to hide >0 check.
                 conversion.shiftNextNumeralValueFromArabicToRoman();
+                if (conversion.romanEndsWithMoreThan3InARow()) {
+                    if (conversion.getCurrentRomanValue().endsWith("MMMM")) {
+                        throw new Exception("Number " + num + " is too large for Roman numeral representation.");
+                    }
+                    conversion.replaceExcessiveRepeated1LikeNumeralsWith4Or9();
+                }
             }
             romanChars = conversion.getCurrentRomanValue();
         }
