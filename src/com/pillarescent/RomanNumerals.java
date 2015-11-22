@@ -9,15 +9,15 @@ public class RomanNumerals {
     public String fromArabic(int num) {
         String romanChars = "";
         try {
-            String biggestNumeral = biggestRequiredNumeral(num);
-            int valOfBiggestNumeral = valueOfNumeral(biggestNumeral);
             while (num > 0) {
-                romanChars = romanChars + "I";
-                num--;
+                String biggestNumeral = biggestRequiredNumeral(num);
+                int valOfBiggestNumeral = valueOfNumeral(biggestNumeral);
+                romanChars = romanChars + biggestNumeral;
+                num -= valOfBiggestNumeral;
             }
         }
         catch (Exception ex) {
-            // ToDo: What would Uncle Bob do
+            // ToDo: What would Uncle Bob do?
             // At least make sure result is "".
             romanChars = "";
         }
@@ -45,27 +45,22 @@ public class RomanNumerals {
         } else if (num >= 1) {
             result = "I";
         } else {
-            throw new Exception("Number " + num + " is too small for Roman numeral representation.")
+            throw new Exception("Number " + num + " is too small for Roman numeral representation.");
         }
 
         return result;
     }
 
 
-    private static final Map<String, Integer> romanMap;
-
-    static {
-        Map<String,Integer> romanMap = new HashMap<String, Integer>();
-        romanMap.put("M", 1000);
-        romanMap.put("D",  500);
-        romanMap.put("C",  100);
-        romanMap.put("L",   50);
-        romanMap.put("X",   10);
-        romanMap.put("V",    5);
-        romanMap.put("I",    1);
-        romanMap = Collections.unmodifiableMap(aMap);
-    }
-    private int valueOfNumeral(String numeral) {
-
+    private static int valueOfNumeral(String numeral)
+        throws Exception {
+        if (numeral.equals("M")) { return 1000; }
+        if (numeral.equals("D")) { return  500; }
+        if (numeral.equals("C")) { return  100; }
+        if (numeral.equals("L")) { return   50; }
+        if (numeral.equals("X")) { return   10; }
+        if (numeral.equals("V")) { return    5; }
+        if (numeral.equals("I")) { return    1; }
+        throw new Exception("String '" + numeral + "' is not a Roman numeral.");
     }
 }

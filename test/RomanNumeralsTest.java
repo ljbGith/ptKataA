@@ -25,6 +25,13 @@ public class RomanNumeralsTest {
     @Test
     public void whenInputIs4OutputDoesNotContainMoreThan3IsInARow() {
         RomanNumerals romanNumerals = new RomanNumerals();
-        assertFalse(romanNumerals.fromArabic(4).contains("IIII"));
+        String romanFor4 = romanNumerals.fromArabic(4);
+        assertFalse(romanFor4.contains("IIII"));
+    }
+    @Test
+    public void whenInputIs157OutputIsCLVII() {
+        RomanNumerals romanNumerals = new RomanNumerals();
+        String romanFor157 = romanNumerals.fromArabic(157);
+        assertEquals("CLVII", romanFor157);
     }
 }
