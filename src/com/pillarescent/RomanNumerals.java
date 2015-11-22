@@ -7,13 +7,14 @@ import java.util.Map;
 
 public class RomanNumerals {
     public String fromArabic(int num) {
-        String romanChars = "";
+        String romanChars;
         try {
             ArabicToRomanConversion conversion = new ArabicToRomanConversion(num);
             while ( ! conversion.conversionIsDone() ) {
                 // ToDo: conversionState.isDone method to hide >0 check.
                 conversion.shiftNextNumeralValueFromArabicToRoman();
             }
+            romanChars = conversion.getCurrentRomanValue();
         }
         catch (Exception ex) {
             // ToDo: What would Uncle Bob do?
