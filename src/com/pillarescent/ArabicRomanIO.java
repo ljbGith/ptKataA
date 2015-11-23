@@ -31,7 +31,16 @@ public class ArabicRomanIO {
         while (scanner.hasNextLine()) {
             String oneLine = scanner.nextLine();
             String trimmedLine = oneLine.trim();
-            writer.println(trimmedLine);
+            String convertedValue;
+            int value;
+            try {
+                value = Integer.parseInt(trimmedLine);
+                convertedValue = romanNumerals.fromArabic(value);
+            }
+            catch ( NumberFormatException numFormatEx) {
+                convertedValue = "Error: expected a regular number like 1, 42, or 3999. Instead saw '" + trimmedLine + "'.";
+            }
+            writer.println(convertedValue);
         }
     }
 
