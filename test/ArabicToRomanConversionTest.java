@@ -103,7 +103,7 @@ public class ArabicToRomanConversionTest  {
             arabicToRomanConv.replaceExcessiveRepeated1LikeNumeralsWith4Or9();
             assertTrue(shiftCount < 100);  // Expect that loop should be limited.
         }
-        assertEquals(arabicToRomanConv.getCurrentRomanValue(), "CMXCIX");
+        assertEquals("CMXCIX", arabicToRomanConv.getCurrentRomanValue());
     }
     @Test
     public void onArabic1944ShiftAndFix4sUntilDoneAndExpectRomanToBeMCMXLIV() throws Exception {
@@ -115,7 +115,7 @@ public class ArabicToRomanConversionTest  {
             arabicToRomanConv.replaceExcessiveRepeated1LikeNumeralsWith4Or9();
             assertTrue(shiftCount < 100);  // Expect that loop should be limited.
         }
-        assertEquals(arabicToRomanConv.getCurrentRomanValue(), "MCMXLIV");
+        assertEquals("MCMXLIV", arabicToRomanConv.getCurrentRomanValue());
     }
 
 }

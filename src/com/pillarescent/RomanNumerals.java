@@ -23,9 +23,7 @@ public class RomanNumerals {
             romanChars = conversion.getCurrentRomanValue();
         }
         catch (Exception ex) {
-            // ToDo: What would Uncle Bob do?
-            // At least make sure result is "".
-            romanChars = "";
+            romanChars = "Error: " + ex.getMessage();
         }
         return romanChars;
     }

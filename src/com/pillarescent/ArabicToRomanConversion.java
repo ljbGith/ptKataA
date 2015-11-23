@@ -102,6 +102,8 @@ public class ArabicToRomanConversion {
             result = "V";
         } else if (num >= 1) {
             result = "I";
+        } else if (num == 0) {
+            result = "";
         } else {
             throw new Exception("Number " + num + " is too small for Roman numeral representation.");
         }

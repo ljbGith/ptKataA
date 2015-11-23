@@ -1,7 +1,9 @@
 import com.pillarescent.RomanNumerals;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 
@@ -151,4 +153,24 @@ public class RomanNumeralsTest {
     public void whenInputIs3900OutputIsMMMCM() { assertEquals("MMMCM", romanNumerals.fromArabic(3900)); }
     @Test
     public void whenInputIs3999OutputIsMMMCMXCIX() { assertEquals("MMMCMXCIX", romanNumerals.fromArabic(3999)); }
+
+    /* "WEIRD" OR "ILLEGAL" INPUTS */
+
+    // 0 -> "" (revisit requirements and sanity-check this case with customer if possible).
+    @Test
+    public void whenInputIs0OutputIs_Blank_() { assertEquals("", romanNumerals.fromArabic(0)); }
+
+    @Rule
+    public final ExpectedException exceptionThrown = ExpectedException.none();
+    @Test
+    public void whenInputIs4000ThrowsException() {
+        String romanFor4000 = romanNumerals.fromArabic(4000);
+        assertEquals("Error: Number 4000 is too large for Roman numeral representation.", romanFor4000);
+    }
+    @Test
+    public void whenInputIsMinus1ThrowsException() {
+        String romanForMinus1 = romanNumerals.fromArabic(-1);
+        assertEquals("Error: Number -1 is too small for Roman numeral representation.", romanForMinus1);
+    }
+
 }
