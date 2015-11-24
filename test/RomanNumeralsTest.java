@@ -171,4 +171,90 @@ public class RomanNumeralsTest {
         assertEquals("Error: Number -1 is too small for Roman numeral representation.", romanForMinus1);
     }
 
+    // ROMAN TO ARABIC TEST CASES
+
+    private void testToArabic(int expectedArabic, String romanInput) {
+         assertEquals(expectedArabic, romanNumerals.toArabic(romanInput));
+    }
+
+    @Test
+    public void whenInputIsIOutputIs1() { testToArabic(1, "I"); }
+    @Test
+    public void whenInputIsIIOutputIs2() { testToArabic(2, "II"); }
+    @Test
+    public void whenInputIsIIIOutputIs3() { testToArabic(3, "III"); }
+    @Test
+    public void whenInputIsIVOutputIs4() { testToArabic(4, "IV"); }
+    @Test
+    public void whenInputIsIVOutputIs5() { testToArabic(5, "V"); }
+    @Test
+    public void whenInputIsIVOutputIs6() { testToArabic(6, "VI"); }
+    @Test
+    public void whenInputIsIVOutputIs8() { testToArabic(8, "VIII"); }
+    @Test
+    public void whenInputIsIXOutputIs9() { testToArabic(9, "IX"); }
+    @Test
+    public void whenInputIsXIVOutputIs14() { testToArabic(14, "XIV"); }
+    @Test
+    public void whenInputIsXXIXOutputIs29() { testToArabic(29, "XXIX"); }
+    @Test
+    public void whenInputIsXLVIIIOutputIs48() { testToArabic(48, "XLVIII"); }
+    /*
+    @Test
+    public void whenInputIsLXXXIVOutputIs84() { testToArabic(84, "LXXXIV"); }
+    @Test
+    public void whenInputIsXCOutputIs90() { testToArabic(90,"XC"); }
+    @Test
+    public void whenInputIsCXLIXOutputIs149() { testToArabic(149, "CXLIX"); }
+    @Test
+    public void whenInputIsCLVIIOutputIs157() { testToArabic(157, "CLVII"); }
+    @Test
+    public void whenInputIsCCCXCIXOutputIs399() { testToArabic(399, "CCCXCIX"); }
+    @Test
+    public void whenInputIsDCCCLXXXOutputIs888() { testToArabic(888, "DCCCLXXXVIII"); }
+    @Test
+    public void whenInputIsMMMCDXLIVOutputIs3444() { testToArabic(3444, "MMMCDXLIV"); }
+    @Test
+    public void whenInputIsMMMDCCCLXXXVIIIOutputIs3888() { testToArabic(3888, "MMMDCCCLXXXVIII"); }
+    @Test
+    public void whenInputIsCXIOutputIs111() { testToArabic(111, "CXI"); }
+    @Test
+    public void whenInputIsCCXXIIOutputIs222() { testToArabic(222, "CCXXII"); }
+    @Test
+    public void whenInputIsCCCXXXIIIOutputIs333() { testToArabic(333, "CCCXXXIII"); }
+    @Test
+    public void whenInputIsCDXLIVOutputIs444() { testToArabic(444, "CDXLIV"); }
+    @Test
+    public void whenInputIsDLVOutputIs499() { testToArabic(499, "CDXCIX"); }
+    @Test
+    public void whenInputIsDLVOutputIs500() { testToArabic(500, "D"); }
+    @Test
+    public void whenInputIsDLVOutputIs555() { testToArabic(555, "DLV"); }
+    @Test
+    public void whenInputIsDCCCLXXXVIIIOutputIs888() { testToArabic(888, "DCCCLXXXVIII"); }
+    @Test
+    public void whenInputIsCMXCIXOutputIs999() { testToArabic(999, "CMXCIX"); }
+    @Test
+    public void whenInputIsMOutputIs1000() { testToArabic(1000, "M"); }
+    @Test
+    public void whenInputIsMIOutputIs1001() { testToArabic(1001, "MI"); }
+    @Test
+    public void whenInputIsMCDXCIXOutputIs1499() { testToArabic(1499, "MCDXCIX"); }
+    @Test
+    public void whenInputIsMDOutputIs1500() { testToArabic(1500, "MD"); }
+    @Test
+    public void whenInputIsMDCCCLXXXVIIIOutputIs1888() { testToArabic(1888, "MDCCCLXXXVIII"); }
+    @Test
+    public void whenInputIsMCMXCIXOutputIs1999() { testToArabic(1999, "MCMXCIX"); }
+    @Test
+    public void whenInputIsMMOutputIs2000() { testToArabic(2000, "MM"); }
+    @Test
+    public void whenInputIsMMMOutputIs3000() { testToArabic(3000, "MMM"); }
+    @Test
+    public void whenInputIsMMMCCCXXXIIIOutputIs3333() { testToArabic(3333, "MMMCCCXXXIII"); }
+    @Test
+    public void whenInputIsMMMCMOutputIs3900() { testToArabic(3900, "MMMCM"); }
+    @Test
+    public void whenInputIsMMMCMXCIXOutputIs3999() { testToArabic(3999, "MMMCMXCIX"); }
+    */
 }

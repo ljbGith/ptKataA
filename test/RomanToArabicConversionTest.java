@@ -22,9 +22,20 @@ public class RomanToArabicConversionTest {
     @Test
     public void afterConstructingOnIAndShiftingArabicIs1AndRomanIs_EMPTY_() throws Exception {
         RomanToArabicConversion romanToArabicConv = new RomanToArabicConversion("I");
-        romanToArabicConv.shiftValueFromArabicToRoman();
+        romanToArabicConv.shiftValueFromRomanToArabic();
         setValuesFrom(romanToArabicConv);
         assertEquals(1, currArabicVal);
+        assertEquals("", currRomanVal);
+    }
+    // Test a Roman with 3 chunks of 2 numerals each (CDXCIV -> CD XC IV -> 494).
+    @Test
+    public void shiftRomanCDXCIV3TimesAndExpectArabic494() throws Exception {
+        RomanToArabicConversion romanToArabicConv = new RomanToArabicConversion("CDXCIV"); // 494
+        romanToArabicConv.shiftValueFromRomanToArabic();
+        romanToArabicConv.shiftValueFromRomanToArabic();
+        romanToArabicConv.shiftValueFromRomanToArabic();
+        setValuesFrom(romanToArabicConv);
+        assertEquals(494, currArabicVal);
         assertEquals("", currRomanVal);
     }
 }

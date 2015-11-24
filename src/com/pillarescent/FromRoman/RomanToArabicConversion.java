@@ -23,17 +23,20 @@ public class RomanToArabicConversion {
 
     protected void setCurrentRomanValue(String newValue) { _currentRomanValue = newValue; }
 
-    public void shiftValueFromArabicToRoman() {
+    public void shiftValueFromRomanToArabic() {
         String highestValuedRomanPrefix = biggestRomanValueUnit(getCurrentRomanValue());
         if ( ! highestValuedRomanPrefix.isEmpty() ) {
             int valueOfRomanPrefix = integerValue(highestValuedRomanPrefix);
-            String newRomanValue = getCurrentRomanValue().replaceFirst("^" + highestValuedRomanPrefix, "" );
+            String newRomanValue = getCurrentRomanValue().replaceFirst("^" + highestValuedRomanPrefix, "");
             setCurrentRomanValue(newRomanValue);
             int newArabicValue = getCurrentArabicValue() + valueOfRomanPrefix;
             setCurrentArabicValue(newArabicValue);
         }
     }
 
+    public boolean conversionIsDone() {
+        return (getCurrentRomanValue().equals(""));
+    }
     /*
         A "Roman value unit" is either a "subtraction pair" of Roman numerals
         (CM = 900, CD = 400, XC = 90, etc.) or a single Roman numeral (M = 1000, etc.).

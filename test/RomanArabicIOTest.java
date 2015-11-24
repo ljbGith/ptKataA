@@ -78,10 +78,19 @@ public class RomanArabicIOTest {
     // "NORMAL" VALUE CONVERSION TESTS.
     @Test
     public void takeIasInputAndOutput1() {
-        takeValueAsInputAndLookForSpecificOutput("IZ", "1");
+        takeValueAsInputAndLookForSpecificOutput("I", "1");
     }
     @Test
     public void takeMMMCMXCIXasInputAndOutput899() { takeValueAsInputAndLookForSpecificOutput("DCCCXCIX", "899"); }
 
-    // "BAD" VALUE CONVERSION TESTS.
+    // "OTHER" VALUE CONVERSION TESTS.
+    @Test
+    public void takeXXXXasInputAndGetError() {
+        takeValueAsInputAndLookForOutputPrefix("XXXX", "Error: expected a Roman numeral ");
+    }
+    @Test
+    public void take_NOTHING_asInputAndGet_NOTHING_asOutput() {
+        takeValueAsInputAndLookForSpecificOutput("", "");
+    }
+
 }
