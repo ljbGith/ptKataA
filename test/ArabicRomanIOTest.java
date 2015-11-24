@@ -9,18 +9,19 @@ import java.io.StringWriter;
 
 public class ArabicRomanIOTest {
 
-    protected void takeValAsInputAndLookForOutputPrefix(String input, String expectedPrefix) {
+    protected String outputFromArabicRomanConversionOn(String input) {
         StringWriter outputSink = new StringWriter();
         ArabicRomanIO io = new ArabicRomanIO(input, outputSink);
         io.handleInputs();
-        String actualOutput = outputSink.toString().replaceAll("\\s+$", "");
+        return outputSink.toString().replaceAll("\\s+$", "");
+    }
+
+    protected void takeValueAsInputAndLookForOutputPrefix(String input, String expectedPrefix) {
+        String actualOutput = outputFromArabicRomanConversionOn(input);
         assertTrue(actualOutput.startsWith(expectedPrefix));
     }
-    protected void takeValAsInputAndLookForSpecificOutput(String input, String expectedOutput) {
-        StringWriter outputSink = new StringWriter();
-        ArabicRomanIO io = new ArabicRomanIO(input, outputSink);
-        io.handleInputs();
-        String actualOutput = outputSink.toString().replaceAll("\\s+$", "");
+    protected void takeValueAsInputAndLookForSpecificOutput(String input, String expectedOutput) {
+        String actualOutput = outputFromArabicRomanConversionOn(input);
         assertEquals(expectedOutput, actualOutput);
     }
 
@@ -35,28 +36,28 @@ public class ArabicRomanIOTest {
 
     @Test
     public void take1asInputAndOutputI() {
-         takeValAsInputAndLookForSpecificOutput("1", "I");
+         takeValueAsInputAndLookForSpecificOutput("1", "I");
     }
     @Test
     public void take3999asInputAndOutputMMMCMXCIX() {
-        takeValAsInputAndLookForSpecificOutput("3999", "MMMCMXCIX");
+        takeValueAsInputAndLookForSpecificOutput("3999", "MMMCMXCIX");
     }
     @Test
     public void takeNoInputAndOutput_NOTHING_() {
-        takeValAsInputAndLookForSpecificOutput("", "");
+        takeValueAsInputAndLookForSpecificOutput("", "");
     }
     @Test
     public void takeNonNumericInputAndOutput_ErrorMessage_() {
-        takeValAsInputAndLookForOutputPrefix("zzz", "Error: expected a regular number ");
+        takeValueAsInputAndLookForOutputPrefix("zzz", "Error: expected a regular number ");
     }
     @Test
     public void takeInputThatIsTooBigAndOutput_ErrorMessage_() {
         String bigNumString = "4000";
-        takeValAsInputAndLookForOutputPrefix(bigNumString, "Error: Number " + bigNumString + " is too large ");
+        takeValueAsInputAndLookForOutputPrefix(bigNumString, "Error: Number " + bigNumString + " is too large ");
     }
     @Test
     public void takeInputThatIsTooSmallAndOutput_ErrorMessage_() {
         String smallNumString = "-1";
-        takeValAsInputAndLookForOutputPrefix(smallNumString, "Error: Number " + smallNumString + " is too small ");
+        takeValueAsInputAndLookForOutputPrefix(smallNumString, "Error: Number " + smallNumString + " is too small ");
     }
 }
