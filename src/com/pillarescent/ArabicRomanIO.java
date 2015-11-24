@@ -11,6 +11,11 @@ import java.util.Scanner;
 
 public class ArabicRomanIO {
 
+    public final String commandToFinishRunning = "quit";
+    protected boolean gotFinishRunningCommand(String line) {
+        return line.toLowerCase().equals(commandToFinishRunning.toLowerCase());
+    }
+
     public ArabicRomanIO() {
         scanner = new Scanner(System.in);
         writer = new PrintWriter(System.out);
@@ -29,8 +34,13 @@ public class ArabicRomanIO {
 
     public void handleInputs() {
         RomanNumerals romanNumerals = new RomanNumerals();
-        while ( scanner.hasNextLine() ) {
+        boolean keepGoing = true;
+        while ( keepGoing && scanner.hasNextLine() ) {
             String oneLine = scanner.nextLine();
+            if (gotFinishRunningCommand(oneLine)) {
+                keepGoing = false;
+            }
+            else {
                 String trimmedLine = oneLine.trim();
                 String convertedValue;
                 int value;
@@ -42,6 +52,7 @@ public class ArabicRomanIO {
                     convertedValue = "Error: expected a regular number like 1, 42, or 3999. Instead saw '" + trimmedLine + "'.";
                 }
                 writer.println(convertedValue);
+            }
         }
     }
 

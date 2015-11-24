@@ -9,6 +9,8 @@ import java.io.StringWriter;
 
 public class ArabicRomanIOTest {
 
+    protected static final String newLine = System.lineSeparator();
+
     protected String outputFromArabicRomanConversionOn(String input) {
         StringWriter outputSink = new StringWriter();
         ArabicRomanIO io = new ArabicRomanIO(input, outputSink);
@@ -62,12 +64,23 @@ public class ArabicRomanIOTest {
     }
     @Test
     public void take1And2And3OnSeparateLinesAndOutputI_II_and_IIIOnSeparateLines() {
-        String  input = String.join(System.lineSeparator(), new String[] {"1", "2", "3"});
-        String output = String.join(System.lineSeparator(), new String[] {"I", "II", "III"});
-        takeValueAsInputAndLookForSpecificOutput(input, output);
+        String input = "1" + newLine + "2" + newLine + "3";
+        String expectedOutput = "I" + newLine + "II" + newLine + "III";
+        takeValueAsInputAndLookForSpecificOutput(input, expectedOutput);
     }
     @Test
     public void takeQuitOnFirstLineAndOutput_NOTHING_() {
         takeValueAsInputAndLookForSpecificOutput("quit", "");
+    }
+    @Test
+    public void take11OnFirstLineAndQuitOnSecondLineAndOutputXI() {
+        String input = "11" + newLine + "quit";
+        takeValueAsInputAndLookForSpecificOutput(input, "XI");
+    }
+    @Test
+    public void take11OnFirstLineQuitOnSecondLineAnd12OnThirdLineAndOutputXI() {
+        // Illustrates that as soon as "quit" line is seen, processing stops.
+        String input = "11" + newLine + "quit" + newLine + "12";
+        takeValueAsInputAndLookForSpecificOutput(input, "XI");
     }
 }
