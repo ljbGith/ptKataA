@@ -80,6 +80,7 @@ public class ArabicRomanIOTest {
     @Test
     public void take11OnFirstLineQuitOnSecondLineAnd12OnThirdLineAndOutputXI() {
         // Illustrates that as soon as "quit" line is seen, processing stops.
+        // The lack of handling of "12" models the exiting of the program in interactive mode.
         String input = "11" + newLine + "quit" + newLine + "12";
         takeValueAsInputAndLookForSpecificOutput(input, "XI");
     }

@@ -21,19 +21,12 @@ public class ArabicRomanIO {
         writer = new PrintWriter(System.out);
     }
 
-    public ArabicRomanIO(String inputString) {
-        scanner = new Scanner(inputString);
-        writer = new PrintWriter(System.out);
-    }
-
     public ArabicRomanIO(String inputString, StringWriter output) {
         scanner = new Scanner(inputString);
         writer = new PrintWriter(output);
     }
 
-
     public void handleInputs() {
-        RomanNumerals romanNumerals = new RomanNumerals();
         boolean keepGoing = true;
         while ( keepGoing && scanner.hasNextLine() ) {
             String oneLine = scanner.nextLine();
@@ -41,19 +34,24 @@ public class ArabicRomanIO {
                 keepGoing = false;
             }
             else {
-                String trimmedLine = oneLine.trim();
-                String convertedValue;
-                int value;
-                try {
-                    value = Integer.parseInt(trimmedLine);
-                    convertedValue = romanNumerals.fromArabic(value);
-                }
-                catch (NumberFormatException numFormatEx) {
-                    convertedValue = "Error: expected a regular number like 1, 42, or 3999. Instead saw '" + trimmedLine + "'.";
-                }
-                writer.println(convertedValue);
+                handleLine(oneLine);
             }
         }
+    }
+
+    protected void handleLine(String oneLine) {
+        RomanNumerals romanNumerals = new RomanNumerals();
+        String trimmedLine = oneLine.trim();
+        String convertedValue;
+        int value;
+        try {
+            value = Integer.parseInt(trimmedLine);
+            convertedValue = romanNumerals.fromArabic(value);
+        }
+        catch (NumberFormatException numFormatEx) {
+            convertedValue = "Error: expected a regular number like 1, 42, or 3999. Instead saw '" + trimmedLine + "'.";
+        }
+        writer.println(convertedValue);
     }
 
     protected Scanner scanner;
