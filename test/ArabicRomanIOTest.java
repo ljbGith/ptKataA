@@ -60,4 +60,14 @@ public class ArabicRomanIOTest {
         String smallNumString = "-1";
         takeValueAsInputAndLookForOutputPrefix(smallNumString, "Error: Number " + smallNumString + " is too small ");
     }
+    @Test
+    public void take1And2And3OnSeparateLinesAndOutputI_II_and_IIIOnSeparateLines() {
+        String  input = String.join(System.lineSeparator(), new String[] {"1", "2", "3"});
+        String output = String.join(System.lineSeparator(), new String[] {"I", "II", "III"});
+        takeValueAsInputAndLookForSpecificOutput(input, output);
+    }
+    @Test
+    public void takeQuitOnFirstLineAndOutput_NOTHING_() {
+        takeValueAsInputAndLookForSpecificOutput("quit", "");
+    }
 }

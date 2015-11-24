@@ -26,21 +26,22 @@ public class ArabicRomanIO {
         writer = new PrintWriter(output);
     }
 
+
     public void handleInputs() {
         RomanNumerals romanNumerals = new RomanNumerals();
-        while (scanner.hasNextLine()) {
+        while ( scanner.hasNextLine() ) {
             String oneLine = scanner.nextLine();
-            String trimmedLine = oneLine.trim();
-            String convertedValue;
-            int value;
-            try {
-                value = Integer.parseInt(trimmedLine);
-                convertedValue = romanNumerals.fromArabic(value);
-            }
-            catch ( NumberFormatException numFormatEx) {
-                convertedValue = "Error: expected a regular number like 1, 42, or 3999. Instead saw '" + trimmedLine + "'.";
-            }
-            writer.println(convertedValue);
+                String trimmedLine = oneLine.trim();
+                String convertedValue;
+                int value;
+                try {
+                    value = Integer.parseInt(trimmedLine);
+                    convertedValue = romanNumerals.fromArabic(value);
+                }
+                catch (NumberFormatException numFormatEx) {
+                    convertedValue = "Error: expected a regular number like 1, 42, or 3999. Instead saw '" + trimmedLine + "'.";
+                }
+                writer.println(convertedValue);
         }
     }
 
