@@ -1,9 +1,7 @@
-package com.pillarescent;
+package com.pillarescent.CommonRoman;
 
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import com.pillarescent.ToRoman.ArabicToRomanConversion;
 
 public class RomanNumerals {
     public String fromArabic(int num) {
@@ -11,7 +9,6 @@ public class RomanNumerals {
         try {
             ArabicToRomanConversion conversion = new ArabicToRomanConversion(num);
             while ( ! conversion.conversionIsDone() ) {
-                // ToDo: conversionState.isDone method to hide >0 check.
                 conversion.shiftNextNumeralValueFromArabicToRoman();
                 if (conversion.romanEndsWithMoreThan3InARow()) {
                     if (conversion.getCurrentRomanValue().endsWith("MMMM")) {
@@ -26,6 +23,13 @@ public class RomanNumerals {
             romanChars = "Error: " + ex.getMessage();
         }
         return romanChars;
+    }
+
+    public String toArabic(String romanNumeral) {
+        return "";   // ToDo: IMPLEMENT THIS!
+    }
+    public boolean isWellFormedRomanNumeral(String romanToCheck) {
+        return false;   // ToDo: IMPLEMENT THIS!
     }
 
 }

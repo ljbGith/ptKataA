@@ -1,4 +1,4 @@
-import com.pillarescent.RomanNumerals;
+import com.pillarescent.CommonRoman.RomanNumerals;
 
 import org.junit.Before;
 import org.junit.Rule;

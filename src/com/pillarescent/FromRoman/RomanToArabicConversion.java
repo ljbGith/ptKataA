@@ -1,12 +1,12 @@
-package com.pillarescent;
+package com.pillarescent.FromRoman;
 
 public class RomanToArabicConversion {
     protected String _currentRomanValue;
     protected int _currentArabicValue;
 
-    public RomanToArabicConversion(int arabicStartingValue) {
-        _currentRomanValue = "";   // Redundant?
-        _currentArabicValue = arabicStartingValue;
+    public RomanToArabicConversion(String romanStartingValue) {
+        _currentRomanValue = romanStartingValue;
+        _currentArabicValue = 0;
     }
 
     public int getCurrentArabicValue() {

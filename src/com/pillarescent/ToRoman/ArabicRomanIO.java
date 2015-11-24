@@ -1,10 +1,10 @@
-package com.pillarescent;
+package com.pillarescent.ToRoman;
 
 
-import java.io.OutputStream;
+import com.pillarescent.CommonRoman.RomanNumerals;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 // ToDo: define exact usage, including how user quits the endless loop when inputting numbers at the console.

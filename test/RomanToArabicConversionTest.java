@@ -1,4 +1,4 @@
-import com.pillarescent.RomanToArabicConversion;
+import com.pillarescent.FromRoman.RomanToArabicConversion;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -13,10 +13,10 @@ public class RomanToArabicConversionTest {
     }
 
     @Test
-    public void afterConstructingOn1QueryOnStateYieldsOrigArabicValAndEmptyRomanRepresentation() {
-        RomanToArabicConversion romanToArabicConv = new RomanToArabicConversion();
+    public void afterConstructingOnIQueryOnStateYieldsOrigArabicValAndArabicValue0() {
+        RomanToArabicConversion romanToArabicConv = new RomanToArabicConversion("I");
         setValuesFrom(romanToArabicConv);
-        assertEquals(1, currArabicVal);
-        assertEquals("", currRomanVal);
+        assertEquals("I", currRomanVal);
+        assertEquals(0, currArabicVal);
     }
 }

@@ -1,4 +1,4 @@
-import com.pillarescent.ArabicToRomanConversion;
+import com.pillarescent.ToRoman.ArabicToRomanConversion;
 
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
