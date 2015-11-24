@@ -36,6 +36,16 @@ public class RomanArabicIO {
         }
     }
 
+    public boolean isValidRoman() {
+        boolean ok = true;
+        RomanNumerals romanNumerals = new RomanNumerals();
+        if (scanner.hasNextLine()) {
+            String nextRomanToCheck = scanner.nextLine();
+            ok = romanNumerals.isWellFormedRomanNumeral(nextRomanToCheck);
+        }
+        return ok;
+    }
+
     protected void handleLine(String oneLine) {
         RomanNumerals romanNumerals = new RomanNumerals();
         String trimmedLine = oneLine.trim();

@@ -5,6 +5,8 @@ import com.pillarescent.FromRoman.RomanArabicIO;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.assertFalse;
+
 
 public class RomanArabicIOTest {
     protected static final String newLine = System.lineSeparator();
@@ -25,6 +27,7 @@ public class RomanArabicIOTest {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    // CONSTRUCTION TEST
     @Test
     public void doInputGetAnyKindOfOutput() {
         StringWriter outputSink = new StringWriter();
@@ -34,10 +37,51 @@ public class RomanArabicIOTest {
         junit.framework.TestCase.assertFalse(output.length() == 0);
     }
 
+    // LEXICAL-CHECK TESTS
+    private boolean isGoodRoman(String toCheck) {
+        StringWriter outputSink = new StringWriter();
+        RomanArabicIO io = new RomanArabicIO(toCheck, outputSink);
+        return io.isValidRoman();
+    }
+
+    @Test
+    public void checkSmallRomanNumeralsForLexicalValidity() {
+        assertTrue( isGoodRoman("I") && isGoodRoman("II") && isGoodRoman("III") && isGoodRoman("IV") && isGoodRoman("V"));
+    }
+    @Test
+    public void checkSmallishRomanNumeralsForLexicalValidity() {
+        assertTrue(isGoodRoman("VI") && isGoodRoman("IX") && isGoodRoman("XIV") && isGoodRoman("XXIX"));
+    }
+    @Test
+    public void checkMediumRomanNumeralsForLexicalValidity() {
+        assertTrue(isGoodRoman("XLIV") && isGoodRoman("LXXXVIII") && isGoodRoman("XC"));
+        assertTrue(isGoodRoman("CCXXII") && isGoodRoman("CD") && isGoodRoman("CDX"));
+    }
+    @Test
+    public void checkBigRomanNumeralsForLexicalValidity() {
+        assertTrue( isGoodRoman("DXCIX") && isGoodRoman("DCCC") && isGoodRoman("CM") );
+        assertTrue( isGoodRoman("MMMCMXCIX") );
+    }
+    @Test
+    public void checkBadRomanNumeralsDDGetLexicallyRejected() { assertFalse( isGoodRoman("DD") ); }
+    @Test
+    public void checkBadRomanNumeralsIIIIGetLexicallyRejected() { assertFalse( isGoodRoman("IIII") ); }
+    @Test
+    public void checkBadRomanNumeralsIXVGetLexicallyRejected() { assertFalse( isGoodRoman("IXV") ); }
+    @Test
+    public void checkBadRomanNumeralsZZZGetLexicallyRejected() { assertFalse( isGoodRoman("ZZZ") ); }
+    @Test
+    public void inputYYYAsRomanGetErrorMessage() {
+        takeValueAsInputAndLookForOutputPrefix("YYY", "Error: expected a Roman numeral");
+    }
+
+    // "NORMAL" VALUE CONVERSION TESTS.
     @Test
     public void takeIasInputAndOutput1() {
-        takeValueAsInputAndLookForSpecificOutput("1", "I");
+        takeValueAsInputAndLookForSpecificOutput("IZ", "1");
     }
     @Test
     public void takeMMMCMXCIXasInputAndOutput899() { takeValueAsInputAndLookForSpecificOutput("DCCCXCIX", "899"); }
+
+    // "BAD" VALUE CONVERSION TESTS.
 }
