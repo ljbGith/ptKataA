@@ -19,4 +19,12 @@ public class RomanToArabicConversionTest {
         assertEquals("I", currRomanVal);
         assertEquals(0, currArabicVal);
     }
+    @Test
+    public void afterConstructingOnIAndShiftingArabicIs1AndRomanIs_EMPTY_() throws Exception {
+        RomanToArabicConversion romanToArabicConv = new RomanToArabicConversion("I");
+        romanToArabicConv.shiftValueFromArabicToRoman();
+        setValuesFrom(romanToArabicConv);
+        assertEquals(1, currArabicVal);
+        assertEquals("", currRomanVal);
+    }
 }
