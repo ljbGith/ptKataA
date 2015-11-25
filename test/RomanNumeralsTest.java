@@ -177,6 +177,7 @@ public class RomanNumeralsTest {
          assertEquals(expectedArabic, romanNumerals.toArabic(romanInput));
     }
 
+    // NORMAL CASES
     @Test
     public void whenInputIsIOutputIs1() { testToArabic(1, "I"); }
     @Test
@@ -194,34 +195,33 @@ public class RomanNumeralsTest {
     @Test
     public void whenInputIsIXOutputIs9() { testToArabic(9, "IX"); }
     @Test
+    public void whenInputIsXOutputIs10() { testToArabic(10, "X"); }
+    @Test
     public void whenInputIsXIVOutputIs14() { testToArabic(14, "XIV"); }
     @Test
     public void whenInputIsXXIXOutputIs29() { testToArabic(29, "XXIX"); }
     @Test
+    public void whenInputIsXLOutputIs40() { testToArabic(40, "XL"); }
+    @Test
     public void whenInputIsXLVIIIOutputIs48() { testToArabic(48, "XLVIII"); }
-    /*
     @Test
     public void whenInputIsLXXXIVOutputIs84() { testToArabic(84, "LXXXIV"); }
     @Test
-    public void whenInputIsXCOutputIs90() { testToArabic(90,"XC"); }
+    public void whenInputIsXCOutputIs90() { testToArabic(90, "XC"); }
+    @Test
+    public void whenInputIsCXIOutputIs111() { testToArabic(111, "CXI"); }
     @Test
     public void whenInputIsCXLIXOutputIs149() { testToArabic(149, "CXLIX"); }
     @Test
     public void whenInputIsCLVIIOutputIs157() { testToArabic(157, "CLVII"); }
     @Test
-    public void whenInputIsCCCXCIXOutputIs399() { testToArabic(399, "CCCXCIX"); }
-    @Test
-    public void whenInputIsDCCCLXXXOutputIs888() { testToArabic(888, "DCCCLXXXVIII"); }
-    @Test
-    public void whenInputIsMMMCDXLIVOutputIs3444() { testToArabic(3444, "MMMCDXLIV"); }
-    @Test
-    public void whenInputIsMMMDCCCLXXXVIIIOutputIs3888() { testToArabic(3888, "MMMDCCCLXXXVIII"); }
-    @Test
-    public void whenInputIsCXIOutputIs111() { testToArabic(111, "CXI"); }
-    @Test
     public void whenInputIsCCXXIIOutputIs222() { testToArabic(222, "CCXXII"); }
     @Test
     public void whenInputIsCCCXXXIIIOutputIs333() { testToArabic(333, "CCCXXXIII"); }
+    @Test
+    public void whenInputIsCCCXCIXOutputIs399() { testToArabic(399, "CCCXCIX"); }
+    @Test
+    public void whenInputIsCDOutputIs400() { testToArabic(400, "CD"); }
     @Test
     public void whenInputIsCDXLIVOutputIs444() { testToArabic(444, "CDXLIV"); }
     @Test
@@ -234,6 +234,8 @@ public class RomanNumeralsTest {
     public void whenInputIsDCCCLXXXVIIIOutputIs888() { testToArabic(888, "DCCCLXXXVIII"); }
     @Test
     public void whenInputIsCMXCIXOutputIs999() { testToArabic(999, "CMXCIX"); }
+    @Test
+    public void whenInputIsCMOutputIs900() { testToArabic(900, "CM"); }
     @Test
     public void whenInputIsMOutputIs1000() { testToArabic(1000, "M"); }
     @Test
@@ -253,8 +255,18 @@ public class RomanNumeralsTest {
     @Test
     public void whenInputIsMMMCCCXXXIIIOutputIs3333() { testToArabic(3333, "MMMCCCXXXIII"); }
     @Test
+    public void whenInputIsMMMCDXLIVOutputIs3444() { testToArabic(3444, "MMMCDXLIV"); }
+    @Test
+    public void whenInputIsMMMDCCCLXXXVIIIOutputIs3888() { testToArabic(3888, "MMMDCCCLXXXVIII"); }
+    @Test
     public void whenInputIsMMMCMOutputIs3900() { testToArabic(3900, "MMMCM"); }
     @Test
     public void whenInputIsMMMCMXCIXOutputIs3999() { testToArabic(3999, "MMMCMXCIX"); }
-    */
+
+    // BAD-ROMAN CASES
+    @Test
+    public void whenInputIsMMMMOutputIs_Error_() { testToArabic(-1, "MMMM"); }
+    @Test
+    public void whenInputIsZZZZOutputIs_Error_() { testToArabic(-1, "ZZZZ"); }
+
 }

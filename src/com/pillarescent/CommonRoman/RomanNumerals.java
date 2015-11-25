@@ -5,6 +5,7 @@ import com.pillarescent.FromRoman.RomanToArabicConversion;
 import com.pillarescent.ToRoman.ArabicToRomanConversion;
 
 public class RomanNumerals {
+
     public String fromArabic(int num) {
         String romanChars;
         try {
@@ -27,15 +28,16 @@ public class RomanNumerals {
     }
 
     public int toArabic(String romanNumeral) {
-        int arabicValue;
+        int arabicValue = -1;  // Assume failure.
         try {
             RomanToArabicConversion conversion = new RomanToArabicConversion(romanNumeral);
-            while ( ! conversion.conversionIsDone() ) {
+            while (!conversion.conversionIsDone()) {
                 conversion.shiftValueFromRomanToArabic();
             }
-            arabicValue = conversion.getCurrentArabicValue();
-        }
-        catch (Exception conversionException) {
+            if (!conversion.getConversionFailed()) {
+                arabicValue = conversion.getCurrentArabicValue();
+            }
+        } catch (Exception conversionException) {
             // ToDo: Analyze calls inside the try: Is there any reason to believe this will happen?
             arabicValue = -1;
         }

@@ -51,13 +51,21 @@ public class RomanArabicIO {
         String trimmedLine = oneLine.trim();
         if (romanNumerals.isWellFormedRomanNumeral(trimmedLine)) {
             int arabicValue = romanNumerals.toArabic(trimmedLine);
-            writer.println(arabicValue);
+            if (arabicValue < 0) {
+                // ToDo: in toArabic, replace return of -1 with throwing an exception in error cases.
+                writer.println(badRomanMessage(trimmedLine));
+            }
+            else {
+                writer.println(arabicValue);
+            }
         }
         else {
-            String errMsg  =
-                    "Error: expected a Roman numeral like I, XLII, or MMMCMXCIX. Instead saw '" + trimmedLine + "'.";
-            writer.println(errMsg);
+            writer.println(badRomanMessage(trimmedLine));
         }
+    }
+
+    protected String badRomanMessage(String input) {
+        return "Error: expected a Roman numeral like I, XLII, or MMMCMXCIX. Instead saw '" + input + "'.";
     }
 
     protected Scanner scanner;

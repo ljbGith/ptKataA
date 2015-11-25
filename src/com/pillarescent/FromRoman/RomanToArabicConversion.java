@@ -3,10 +3,12 @@ package com.pillarescent.FromRoman;
 public class RomanToArabicConversion {
     protected String _currentRomanValue;
     protected int _currentArabicValue;
+    protected boolean _conversionFailed;
 
     public RomanToArabicConversion(String romanStartingValue) {
         _currentRomanValue = romanStartingValue;
         _currentArabicValue = 0;
+        _conversionFailed = false;
     }
 
     public int getCurrentArabicValue() {
@@ -17,25 +19,36 @@ public class RomanToArabicConversion {
                                                      _currentArabicValue = newValue;
                                                                                     }
 
-    public String getCurrentRomanValue() {
-                                       return _currentRomanValue;
-                                                                 }
+    public String getCurrentRomanValue() { return _currentRomanValue; }
 
     protected void setCurrentRomanValue(String newValue) { _currentRomanValue = newValue; }
 
+    public boolean getConversionFailed() { return _conversionFailed; }
+
+    protected void setConversionFailed(boolean newValue) { _conversionFailed = newValue; }
+
     public void shiftValueFromRomanToArabic() {
         String highestValuedRomanPrefix = biggestRomanValueUnit(getCurrentRomanValue());
-        if ( ! highestValuedRomanPrefix.isEmpty() ) {
-            int valueOfRomanPrefix = integerValue(highestValuedRomanPrefix);
-            String newRomanValue = getCurrentRomanValue().replaceFirst("^" + highestValuedRomanPrefix, "");
-            setCurrentRomanValue(newRomanValue);
-            int newArabicValue = getCurrentArabicValue() + valueOfRomanPrefix;
-            setCurrentArabicValue(newArabicValue);
+        if ( highestValuedRomanPrefix.isEmpty() ) {
+            // Here, highest prefix cannot be "" due to normal shifting, so it is the result of an error.
+            setConversionFailed(true);
+        }
+        else {
+            removeRomanPrefixAndAddValueToArabicSum(highestValuedRomanPrefix);
         }
     }
 
+    protected void removeRomanPrefixAndAddValueToArabicSum(String highestValuedRomanPrefix) {
+        int valueOfRomanPrefix = integerValue(highestValuedRomanPrefix);
+        String newRomanValue = getCurrentRomanValue().replaceFirst("^" + highestValuedRomanPrefix, "");
+        setCurrentRomanValue(newRomanValue);
+        int newArabicValue = getCurrentArabicValue() + valueOfRomanPrefix;
+        setCurrentArabicValue(newArabicValue);
+    }
+
     public boolean conversionIsDone() {
-        return (getCurrentRomanValue().equals(""));
+        // Quit "converting" if anything goes wrong or all the Roman has been converted and removed.
+        return ( getConversionFailed() || getCurrentRomanValue().equals("") );
     }
     /*
         A "Roman value unit" is either a "subtraction pair" of Roman numerals
@@ -46,14 +59,15 @@ public class RomanToArabicConversion {
         IF there is no "M" following it. If we see a "CM", both those characters are
         processed together and yield the value 900. (Likewise for CD, XC, etc.)
      */
+
     private static String biggestRomanValueUnit(String roman) {
         final String[] possibleUnits = {
-                "CM", "CD", "M", "D", "XC", "XL", "C", "L", "IX", "IV", "V", "I"
+                "CM", "CD", "M", "D", "XC", "XL", "C", "L", "IX", "IV", "X", "V", "I"
         };
         // Checking these in order, one MUST match the start of 'roman' and
-        // the first string to match must be the highest-valued Roman value unit.
+        // the first one to match MUST be the highest-valued Roman value unit.
 
-        String result;
+        String result = ""; // Assume failure, set it later if result is obtained.
         boolean found = false;
         int possibleUnitIndex = 0;
         String possibleUnit = "";
@@ -65,9 +79,6 @@ public class RomanToArabicConversion {
         // Not found should only happen if roman was empty.
         if ( found ) {
             result = possibleUnit;
-        }
-        else {
-            result = "";
         }
         return result;
     }

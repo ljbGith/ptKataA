@@ -11,14 +11,13 @@ import static junit.framework.TestCase.assertFalse;
 public class RomanArabicIOTest {
     protected static final String newLine = System.lineSeparator();
 
-    protected String outputFromRomanArabicConversionOn(String input) {
+    protected static String outputFromRomanArabicConversionOn(String input) {
         StringWriter outputSink = new StringWriter();
         RomanArabicIO io = new RomanArabicIO(input, outputSink);
         io.handleInputs();
         return outputSink.toString().replaceAll("\\s+$", "");
     }
-
-    protected void takeValueAsInputAndLookForOutputPrefix(String input, String expectedPrefix) {
+    void takeValueAsInputAndLookForOutputPrefix(String input, String expectedPrefix) {
         String actualOutput = outputFromRomanArabicConversionOn(input);
         assertTrue(actualOutput.startsWith(expectedPrefix));
     }
@@ -91,6 +90,10 @@ public class RomanArabicIOTest {
     @Test
     public void take_NOTHING_asInputAndGet_NOTHING_asOutput() {
         takeValueAsInputAndLookForSpecificOutput("", "");
+    }
+    @Test
+    public void takeMMMMasInputAndGetError() {
+        takeValueAsInputAndLookForOutputPrefix("MMMM", "Error: expected a Roman numeral like");
     }
 
 }
