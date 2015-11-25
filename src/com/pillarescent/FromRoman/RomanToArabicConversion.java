@@ -1,5 +1,8 @@
 package com.pillarescent.FromRoman;
 
+import com.pillarescent.CommonRoman.RomanNumerals;
+
+
 public class RomanToArabicConversion {
     protected String _currentRomanValue;
     protected int _currentArabicValue;
@@ -9,6 +12,7 @@ public class RomanToArabicConversion {
         _currentRomanValue = romanStartingValue;
         _currentArabicValue = 0;
         _conversionFailed = false;
+        flagConversionFailureOnBadRomanNumeralString();
     }
 
     public int getCurrentArabicValue() {
@@ -26,6 +30,12 @@ public class RomanToArabicConversion {
     public boolean getConversionFailed() { return _conversionFailed; }
 
     protected void setConversionFailed(boolean newValue) { _conversionFailed = newValue; }
+
+    public void flagConversionFailureOnBadRomanNumeralString() {
+        if ( ! RomanNumerals.isWellFormedRomanNumeral(_currentRomanValue) ) {
+            setConversionFailed(true);
+        }
+    }
 
     public void shiftValueFromRomanToArabic() {
         String highestValuedRomanPrefix = biggestRomanValueUnit(getCurrentRomanValue());

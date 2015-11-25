@@ -19,14 +19,20 @@ public class ArabicRomanIO {
     public ArabicRomanIO() {
         scanner = new Scanner(System.in);
         writer = new PrintWriter(System.out);
+        prompt = "Enter a regular number to see the Roman numeral equivalent. Enter 'quit' when done.";
     }
 
     public ArabicRomanIO(String inputString, StringWriter output) {
         scanner = new Scanner(inputString);
         writer = new PrintWriter(output);
+        prompt = "";
     }
 
     public void handleInputs() {
+        if ( ! prompt.isEmpty() ) {
+            writer.println(prompt);
+            writer.flush();
+        }
         boolean keepGoing = true;
         while ( keepGoing && scanner.hasNextLine() ) {
             String oneLine = scanner.nextLine();
@@ -40,20 +46,21 @@ public class ArabicRomanIO {
     }
 
     protected void handleLine(String oneLine) {
-        RomanNumerals romanNumerals = new RomanNumerals();
         String trimmedLine = oneLine.trim();
         String convertedValue;
         int value;
         try {
             value = Integer.parseInt(trimmedLine);
-            convertedValue = romanNumerals.fromArabic(value);
+            convertedValue = RomanNumerals.fromArabic(value);
         }
         catch (NumberFormatException numFormatEx) {
             convertedValue = "Error: expected a regular number like 1, 42, or 3999. Instead saw '" + trimmedLine + "'.";
         }
         writer.println(convertedValue);
+        writer.flush();
     }
 
     protected Scanner scanner;
     protected PrintWriter writer;
+    protected String prompt;
 }

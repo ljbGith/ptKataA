@@ -6,7 +6,10 @@ import com.pillarescent.ToRoman.ArabicToRomanConversion;
 
 public class RomanNumerals {
 
-    public String fromArabic(int num) {
+    // Private constructor flags attempts (by code using this class's static methods) to construct an instance.
+    private RomanNumerals() { }
+
+    public static String fromArabic(int num) {
         String romanChars;
         try {
             ArabicToRomanConversion conversion = new ArabicToRomanConversion(num);
@@ -27,14 +30,15 @@ public class RomanNumerals {
         return romanChars;
     }
 
-    public int toArabic(String romanNumeral) {
+    public static int toArabic(String romanNumeral) {
         int arabicValue = -1;  // Assume failure.
         try {
             RomanToArabicConversion conversion = new RomanToArabicConversion(romanNumeral);
-            while (!conversion.conversionIsDone()) {
+            // If romanNumeral is bad Roman (ex.: "MMMM" or "Z"), conversion is both done and failed.
+            while ( ! conversion.conversionIsDone() ) {
                 conversion.shiftValueFromRomanToArabic();
             }
-            if (!conversion.getConversionFailed()) {
+            if ( ! conversion.getConversionFailed() ) {
                 arabicValue = conversion.getCurrentArabicValue();
             }
         } catch (Exception conversionException) {
@@ -44,7 +48,7 @@ public class RomanNumerals {
         return arabicValue;
     }
 
-    public boolean isWellFormedRomanNumeral(String romanToCheck) {
+    public static boolean isWellFormedRomanNumeral(String romanToCheck) {
         return romanToCheck.matches("^(M{0,3}(D|C[DM])?C{0,3}(L|X[LC])?X{0,3}(V|I[VX])?I{0,3})$");
     }
 

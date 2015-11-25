@@ -1,6 +1,7 @@
 
 import java.io.StringWriter;
 
+import com.pillarescent.CommonRoman.RomanNumerals;
 import com.pillarescent.FromRoman.RomanArabicIO;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
@@ -38,9 +39,7 @@ public class RomanArabicIOTest {
 
     // LEXICAL-CHECK TESTS
     private boolean isGoodRoman(String toCheck) {
-        StringWriter outputSink = new StringWriter();
-        RomanArabicIO io = new RomanArabicIO(toCheck, outputSink);
-        return io.isValidRoman();
+        return RomanNumerals.isWellFormedRomanNumeral(toCheck);
     }
 
     @Test

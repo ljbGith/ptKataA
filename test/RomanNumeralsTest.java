@@ -9,172 +9,167 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 
 public class RomanNumeralsTest {
-    RomanNumerals romanNumerals; // To be initialized in each test!
-    @Before
-    public void setUp() {
-        romanNumerals = new RomanNumerals();
-    }
     @Test
     public void whenInputIs1OutputIsASingleI() {
-        assertEquals("I", romanNumerals.fromArabic(1));
+        assertEquals("I", RomanNumerals.fromArabic(1));
     }
     @Test
     public void whenInputIs2OutputIsII() {
-        assertEquals("II", romanNumerals.fromArabic(2));
+        assertEquals("II", RomanNumerals.fromArabic(2));
     }
     @Test
     public void whenInputIs3OutputIsIII() {
-        assertEquals("III", romanNumerals.fromArabic(3));
+        assertEquals("III", RomanNumerals.fromArabic(3));
     }
     @Test
     public void whenInputIs4OutputDoesNotContainMoreThan3IsInARow() {
-        String romanFor4 = romanNumerals.fromArabic(4);
+        String romanFor4 = RomanNumerals.fromArabic(4);
         assertFalse(romanFor4.contains("IIII"));
     }
     @Test
     public void whenInputIs4OutputIsIV() {
-        assertEquals("IV", romanNumerals.fromArabic(4));
+        assertEquals("IV", RomanNumerals.fromArabic(4));
     }
     @Test
     public void whenInputIs157OutputIsCLVII() {
-        String romanFor157 = romanNumerals.fromArabic(157);
+        String romanFor157 = RomanNumerals.fromArabic(157);
         assertEquals("CLVII", romanFor157);
     }
     @Test
     public void whenInputIs9OutputIsIX() {
-        String romanFor9 = romanNumerals.fromArabic(9);
+        String romanFor9 = RomanNumerals.fromArabic(9);
         assertEquals("IX", romanFor9);
     }
     @Test
-    public void whenInputIs14OutputIsXIV() { assertEquals("XIV", romanNumerals.fromArabic(14)); }
+    public void whenInputIs14OutputIsXIV() { assertEquals("XIV", RomanNumerals.fromArabic(14)); }
     @Test
-    public void whenInputIs29OutputIsXXIX() { assertEquals("XXIX", romanNumerals.fromArabic(29)); }
+    public void whenInputIs29OutputIsXXIX() { assertEquals("XXIX", RomanNumerals.fromArabic(29)); }
     @Test
-    public void whenInputIs48OutputIsXLVIII() { assertEquals("XLVIII", romanNumerals.fromArabic(48)); }
+    public void whenInputIs48OutputIsXLVIII() { assertEquals("XLVIII", RomanNumerals.fromArabic(48)); }
     @Test
-    public void whenInputIs84OutputIsLXXXIV() { assertEquals("LXXXIV", romanNumerals.fromArabic(84)); }
+    public void whenInputIs84OutputIsLXXXIV() { assertEquals("LXXXIV", RomanNumerals.fromArabic(84)); }
     @Test
-    public void whenInputIs90OutputIsXC() { assertEquals("XC", romanNumerals.fromArabic(90)); }
+    public void whenInputIs90OutputIsXC() { assertEquals("XC", RomanNumerals.fromArabic(90)); }
     @Test
-    public void whenInputIs149OutputIsCXLIX() { assertEquals("CXLIX", romanNumerals.fromArabic(149)); }
+    public void whenInputIs149OutputIsCXLIX() { assertEquals("CXLIX", RomanNumerals.fromArabic(149)); }
     @Test
-    public void whenInputIs399OutputIsCCCXCIX() { assertEquals("CCCXCIX", romanNumerals.fromArabic(399)); }
+    public void whenInputIs399OutputIsCCCXCIX() { assertEquals("CCCXCIX", RomanNumerals.fromArabic(399)); }
     @Test
-    public void whenInputIs888OutputIsDCCCLXXX() { assertEquals("DCCCLXXXVIII", romanNumerals.fromArabic(888)); }
+    public void whenInputIs888OutputIsDCCCLXXX() { assertEquals("DCCCLXXXVIII", RomanNumerals.fromArabic(888)); }
     @Test
-    public void whenInputIs3444OutputIsMMMCDXLIV() { assertEquals("MMMCDXLIV", romanNumerals.fromArabic(3444)); }
+    public void whenInputIs3444OutputIsMMMCDXLIV() { assertEquals("MMMCDXLIV", RomanNumerals.fromArabic(3444)); }
     @Test
     public void whenInputIs3888OutputIsMMMDCCCLXXXVIII() {
-        assertEquals("MMMDCCCLXXXVIII", romanNumerals.fromArabic(3888));
+        assertEquals("MMMDCCCLXXXVIII", RomanNumerals.fromArabic(3888));
     }
     /* BOUNDARY TESTS */
     @Test
     public void whenInputIs0OutputIs_Empty_() {
-        assertEquals("", romanNumerals.fromArabic(0));
+        assertEquals("", RomanNumerals.fromArabic(0));
     }
 
     /* ALREADY DID 1, 4, 9 ABOVE. */
 
     // Boundary case - 1 I after other numerals.
     @Test
-    public void whenInputIs6OutputIsVI() { assertEquals("VI", romanNumerals.fromArabic(6)); }
+    public void whenInputIs6OutputIsVI() { assertEquals("VI", RomanNumerals.fromArabic(6)); }
 
     // Boundary case - 3 I's after other numerals.
     @Test
-    public void whenInputIs8OutputIsVIII() { assertEquals("VIII", romanNumerals.fromArabic(8)); }
+    public void whenInputIs8OutputIsVIII() { assertEquals("VIII", RomanNumerals.fromArabic(8)); }
 
     // More boundary cases.
     @Test
-    public void whenInputIs10OutputIsX() { assertEquals("X", romanNumerals.fromArabic(10)); }
+    public void whenInputIs10OutputIsX() { assertEquals("X", RomanNumerals.fromArabic(10)); }
     @Test
-    public void whenInputIs15OutputIsXV() { assertEquals("XV", romanNumerals.fromArabic(15)); }
+    public void whenInputIs15OutputIsXV() { assertEquals("XV", RomanNumerals.fromArabic(15)); }
     @Test
-    public void whenInputIs19OutputIsXIX() { assertEquals("XIX", romanNumerals.fromArabic(19)); }
+    public void whenInputIs19OutputIsXIX() { assertEquals("XIX", RomanNumerals.fromArabic(19)); }
     @Test
-    public void whenInputIs39OutputIsXXXIX() { assertEquals("XXXIX", romanNumerals.fromArabic(39)); }
+    public void whenInputIs39OutputIsXXXIX() { assertEquals("XXXIX", RomanNumerals.fromArabic(39)); }
     @Test
-    public void whenInputIs49OutputIsXLIX() { assertEquals("XLIX", romanNumerals.fromArabic(49)); }
+    public void whenInputIs49OutputIsXLIX() { assertEquals("XLIX", RomanNumerals.fromArabic(49)); }
     @Test
-    public void whenInputIs50OutputIsL() { assertEquals("L", romanNumerals.fromArabic(50)); }
+    public void whenInputIs50OutputIsL() { assertEquals("L", RomanNumerals.fromArabic(50)); }
     @Test
-    public void whenInputIs51OutputIsLI() { assertEquals("LI", romanNumerals.fromArabic(51)); }
+    public void whenInputIs51OutputIsLI() { assertEquals("LI", RomanNumerals.fromArabic(51)); }
     @Test
-    public void whenInputIs54OutputIsLIV() { assertEquals("LIV", romanNumerals.fromArabic(54)); }
+    public void whenInputIs54OutputIsLIV() { assertEquals("LIV", RomanNumerals.fromArabic(54)); }
     @Test
-    public void whenInputIs98OutputIsXCVIII() { assertEquals("XCVIII", romanNumerals.fromArabic(98)); }
+    public void whenInputIs98OutputIsXCVIII() { assertEquals("XCVIII", RomanNumerals.fromArabic(98)); }
     @Test
-    public void whenInputIs99OutputIsXCIX() { assertEquals("XCIX", romanNumerals.fromArabic(99)); }
+    public void whenInputIs99OutputIsXCIX() { assertEquals("XCIX", RomanNumerals.fromArabic(99)); }
     @Test
-    public void whenInputIs100OutputIsC() { assertEquals("C", romanNumerals.fromArabic(100)); }
+    public void whenInputIs100OutputIsC() { assertEquals("C", RomanNumerals.fromArabic(100)); }
     @Test
-    public void whenInputIs101OutputIsCI() { assertEquals("CI", romanNumerals.fromArabic(101)); }
+    public void whenInputIs101OutputIsCI() { assertEquals("CI", RomanNumerals.fromArabic(101)); }
     @Test
-    public void whenInputIs110OutputIsCX() { assertEquals("CX", romanNumerals.fromArabic(110)); }
+    public void whenInputIs110OutputIsCX() { assertEquals("CX", RomanNumerals.fromArabic(110)); }
     @Test
-    public void whenInputIs111OutputIsCXI() { assertEquals("CXI", romanNumerals.fromArabic(111)); }
+    public void whenInputIs111OutputIsCXI() { assertEquals("CXI", RomanNumerals.fromArabic(111)); }
     @Test
-    public void whenInputIs222OutputIsCCXXII() { assertEquals("CCXXII", romanNumerals.fromArabic(222)); }
+    public void whenInputIs222OutputIsCCXXII() { assertEquals("CCXXII", RomanNumerals.fromArabic(222)); }
     @Test
-    public void whenInputIs333OutputIsCCCXXXIII() { assertEquals("CCCXXXIII", romanNumerals.fromArabic(333)); }
+    public void whenInputIs333OutputIsCCCXXXIII() { assertEquals("CCCXXXIII", RomanNumerals.fromArabic(333)); }
     @Test
-    public void whenInputIs444OutputIsCDXLIV() { assertEquals("CDXLIV", romanNumerals.fromArabic(444)); }
+    public void whenInputIs444OutputIsCDXLIV() { assertEquals("CDXLIV", RomanNumerals.fromArabic(444)); }
     @Test
-    public void whenInputIs499OutputIsDLV() { assertEquals("CDXCIX", romanNumerals.fromArabic(499)); }
+    public void whenInputIs499OutputIsDLV() { assertEquals("CDXCIX", RomanNumerals.fromArabic(499)); }
     @Test
-    public void whenInputIs500OutputIsDLV() { assertEquals("D", romanNumerals.fromArabic(500)); }
+    public void whenInputIs500OutputIsDLV() { assertEquals("D", RomanNumerals.fromArabic(500)); }
     @Test
-    public void whenInputIs555OutputIsDLV() { assertEquals("DLV", romanNumerals.fromArabic(555)); }
+    public void whenInputIs555OutputIsDLV() { assertEquals("DLV", RomanNumerals.fromArabic(555)); }
     @Test
-    public void whenInputIs888OutputIsDCCCLXXXVIII() { assertEquals("DCCCLXXXVIII", romanNumerals.fromArabic(888)); }
+    public void whenInputIs888OutputIsDCCCLXXXVIII() { assertEquals("DCCCLXXXVIII", RomanNumerals.fromArabic(888)); }
     @Test
-    public void whenInputIs999OutputIsCMXCIX() { assertEquals("CMXCIX", romanNumerals.fromArabic(999)); }
+    public void whenInputIs999OutputIsCMXCIX() { assertEquals("CMXCIX", RomanNumerals.fromArabic(999)); }
     @Test
-    public void whenInputIs1000OutputIsM() { assertEquals("M", romanNumerals.fromArabic(1000)); }
+    public void whenInputIs1000OutputIsM() { assertEquals("M", RomanNumerals.fromArabic(1000)); }
     @Test
-    public void whenInputIs1001OutputIsMI() { assertEquals("MI", romanNumerals.fromArabic(1001)); }
+    public void whenInputIs1001OutputIsMI() { assertEquals("MI", RomanNumerals.fromArabic(1001)); }
     @Test
-    public void whenInputIs1499OutputIsMCDXCIX() { assertEquals("MCDXCIX", romanNumerals.fromArabic(1499)); }
+    public void whenInputIs1499OutputIsMCDXCIX() { assertEquals("MCDXCIX", RomanNumerals.fromArabic(1499)); }
     @Test
-    public void whenInputIs1500OutputIsMD() { assertEquals("MD", romanNumerals.fromArabic(1500)); }
+    public void whenInputIs1500OutputIsMD() { assertEquals("MD", RomanNumerals.fromArabic(1500)); }
     @Test
-    public void whenInputIs1888OutputIsMDCCCLXXXVIII() { assertEquals("MDCCCLXXXVIII", romanNumerals.fromArabic(1888)); }
+    public void whenInputIs1888OutputIsMDCCCLXXXVIII() { assertEquals("MDCCCLXXXVIII", RomanNumerals.fromArabic(1888)); }
     @Test
-    public void whenInputIs1999OutputIsMCMXCIX() { assertEquals("MCMXCIX", romanNumerals.fromArabic(1999)); }
+    public void whenInputIs1999OutputIsMCMXCIX() { assertEquals("MCMXCIX", RomanNumerals.fromArabic(1999)); }
     @Test
-    public void whenInputIs2000OutputIsMM() { assertEquals("MM", romanNumerals.fromArabic(2000)); }
+    public void whenInputIs2000OutputIsMM() { assertEquals("MM", RomanNumerals.fromArabic(2000)); }
     @Test
-    public void whenInputIs3000OutputIsMMM() { assertEquals("MMM", romanNumerals.fromArabic(3000)); }
+    public void whenInputIs3000OutputIsMMM() { assertEquals("MMM", RomanNumerals.fromArabic(3000)); }
     @Test
-    public void whenInputIs3333OutputIsMMMCCCXXXIII() { assertEquals("MMMCCCXXXIII", romanNumerals.fromArabic(3333)); }
+    public void whenInputIs3333OutputIsMMMCCCXXXIII() { assertEquals("MMMCCCXXXIII", RomanNumerals.fromArabic(3333)); }
     /* ALREADY TESTED 3888. */
     @Test
-    public void whenInputIs3900OutputIsMMMCM() { assertEquals("MMMCM", romanNumerals.fromArabic(3900)); }
+    public void whenInputIs3900OutputIsMMMCM() { assertEquals("MMMCM", RomanNumerals.fromArabic(3900)); }
     @Test
-    public void whenInputIs3999OutputIsMMMCMXCIX() { assertEquals("MMMCMXCIX", romanNumerals.fromArabic(3999)); }
+    public void whenInputIs3999OutputIsMMMCMXCIX() { assertEquals("MMMCMXCIX", RomanNumerals.fromArabic(3999)); }
 
     /* "WEIRD" OR "ILLEGAL" INPUTS */
 
     // 0 -> "" (revisit requirements and sanity-check this case with customer if possible).
     @Test
-    public void whenInputIs0OutputIs_Blank_() { assertEquals("", romanNumerals.fromArabic(0)); }
+    public void whenInputIs0OutputIs_Blank_() { assertEquals("", RomanNumerals.fromArabic(0)); }
 
     @Rule
     public final ExpectedException exceptionThrown = ExpectedException.none();
     @Test
     public void whenInputIs4000ThrowsException() {
-        String romanFor4000 = romanNumerals.fromArabic(4000);
+        String romanFor4000 = RomanNumerals.fromArabic(4000);
         assertEquals("Error: Number 4000 is too large for Roman numeral representation.", romanFor4000);
     }
     @Test
     public void whenInputIsMinus1ThrowsException() {
-        String romanForMinus1 = romanNumerals.fromArabic(-1);
+        String romanForMinus1 = RomanNumerals.fromArabic(-1);
         assertEquals("Error: Number -1 is too small for Roman numeral representation.", romanForMinus1);
     }
 
     // ROMAN TO ARABIC TEST CASES
 
     private void testToArabic(int expectedArabic, String romanInput) {
-         assertEquals(expectedArabic, romanNumerals.toArabic(romanInput));
+         assertEquals(expectedArabic, RomanNumerals.toArabic(romanInput));
     }
 
     // NORMAL CASES
